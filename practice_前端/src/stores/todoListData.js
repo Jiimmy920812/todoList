@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
-import  fetchAPI   from "../stores/fetchTool"
+import  fetchAPI   from "./fetchTool"
 
-let url ="http://127.0.0.1:3000/api"
+let url ="http://172.20.10.2:3000/api"
 
-export const usePractice = defineStore({
+export const useTodoList = defineStore({
  id:"try",
  state:()=>({
     name:"",
@@ -14,12 +14,10 @@ export const usePractice = defineStore({
  actions: {
     async getData() {
         try{
-           await fetchAPI.fetchAPI_Get(url,"/getData")
+           await fetchAPI.fetchAPI_Get(url,"/todoList")
            .then((res) => {
                 if(!res.statement) throw "資料拿取失敗"
-                console.log("|getData|",res);
                 this.quesArr = res.data.data
-                console.log("|backEnd|getData|",this.quesArr);
                 return
             })
             }catch(err){
@@ -27,41 +25,33 @@ export const usePractice = defineStore({
                 return
             }
     },
-    async addArticle(name,title,content) {
+    async addArticle(content) {
         let data={
-            "name":name,
-            "title":title,
             "content":content,
         }
-        await fetchAPI.fetchAPI_Post(url,"/addArticle",data)
+        await fetchAPI.fetchAPI_Post(url,"/todoList",data)
         .then((res) => {console.log(res); })
 
-         //重新fetch資料
          this.getData()
     },
     
     async deleteArticle(id) {
-        console.log(id);
         let data={id}
-        await fetchAPI.fetchAPI_Post(url,"/deletArticle",data)
+        await fetchAPI.fetchAPI_Delete(url,"/todoList",data)
         .then((res) => {console.log(res); })
 
-        //重新fetch資料
         this.getData()
 
     },
 
-    async updateArticle(id,name,title,content) {
+    async updateArticle(id,content) {
         let data={
             "id":id,
-            "name":name,
-            "title":title,
             "content":content,
         }
-        await fetchAPI.fetchAPI_Post(url,"/updateArticle",data)
+        await fetchAPI.fetchAPI_Put(url,"/todoList",data)
         .then((res) => {console.log(res); })
         
-        //重新fetch資料
         this.getData()
 
     },

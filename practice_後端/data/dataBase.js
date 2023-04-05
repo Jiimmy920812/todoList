@@ -5,7 +5,7 @@ const con = mysql.createPool({
   user: "root",
   port:3307,
   password: "password",
-  database: "blog"
+  database: "todo_list"
 });
 
 

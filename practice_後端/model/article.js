@@ -13,10 +13,10 @@ exports.getSQL = async(req,res)=> {
 }
 
 exports.addSQL = async(data)=> {
+    console.log(data,'1111111111111111111');
     //data轉陣列，再藉由map重組
-    let list = [data].map(v=> [v.name,v.title,v.content])
-    //sql語法>>>> ('sql指令 value ?', ["111","222","333"])  === ('sql指令 value(111","222","333)')
-    const [rows] = await con.query('INSERT INTO posts(name,title,content) VALUES ?',[list]);
+    let list = [data].map(v=> [v.content])
+    const [rows] = await con.query('INSERT INTO posts(content) VALUES ?',[list]);
     try{
         if (!rows.affectedRows) throw "文章創建失敗";
         return response(true, `addSQL success`, rows);
@@ -36,10 +36,11 @@ exports.deletSQL = async(data)=> {
 }
 
 exports.updateSQL = async(data)=> {
+    console.log(data,'111111111111');
     const [rows] = await con.query
          (`
         UPDATE posts 
-        SET name= '${data.name}', title='${data.title}', content='${data.content}' 
+        SET content='${data.content}' 
         WHERE id='${data.id}'`
          );
     try{

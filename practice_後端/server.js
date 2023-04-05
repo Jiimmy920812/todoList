@@ -3,7 +3,7 @@ const app = express();
 const port = 3000;
 const bodyParser = require('body-parser');
 const path = require('path');
-const {getSQL} = require("./controller/finance")
+const {getSQL} = require("./controller/todo_list")
 //解除外網限制
 // getSQL()
 const cors = require("cors")

@@ -99,7 +99,7 @@ exports.deletArticle = async (req, res) => {
 //     });
 // }
 // //建立文章
-// function financeAddArticle(req,res){
+// function todo_listAddArticle(req,res){
 //     console.log(req.body);
 //     let { name, title, content } = req.body;
 //     console.log(name, title, content);
@@ -207,7 +207,7 @@ exports.deletArticle = async (req, res) => {
 
 // module.exports = {
 //     selectAllSql,
-//     financeAddArticle,
+//     todo_listAddArticle,
 //     deleteArticle,
 //     correctArticle,
 //     sureCorrect
